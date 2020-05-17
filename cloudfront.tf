@@ -35,7 +35,7 @@ resource "aws_cloudfront_distribution" "cf_distro" {
     origin_id   = "S3-${var.bucket_name}"
 
     s3_origin_config {
-      origin_access_identity = "${aws_cloudfront_origin_access_identity.cf_oai.cloudfront_access_identity_path}"
+      origin_access_identity = aws_cloudfront_origin_access_identity.cf_oai.cloudfront_access_identity_path
     }
   }
 
@@ -46,7 +46,7 @@ resource "aws_cloudfront_distribution" "cf_distro" {
   }
 
   viewer_certificate {
-    acm_certificate_arn            = "${data.aws_acm_certificate.tls_cert.arn}"
+    acm_certificate_arn            = data.aws_acm_certificate.tls_cert.arn
     cloudfront_default_certificate = "false"
     minimum_protocol_version       = "TLSv1.1_2016"
     ssl_support_method             = "sni-only"
