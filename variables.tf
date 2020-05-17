@@ -10,6 +10,13 @@ variable "cert_domain" {
   description = "The domain for the TLS certificate in ACM"
 }
 
+variable "cert" {
+  description = "The ACM TLS certificate object"
+  type = object({
+    domain_name = string
+  })
+}
+
 variable "ci_user_arn" {
   description = "arn of the user for the CI build"
 }
