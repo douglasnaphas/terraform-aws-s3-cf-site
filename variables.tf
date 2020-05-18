@@ -6,14 +6,11 @@ variable "domain_name" {
   description = "The host name for the URL for viewing the site"
 }
 
-variable "cert_domain" {
-  description = "The domain for the TLS certificate in ACM"
-}
-
 variable "cert" {
   description = "The ACM TLS certificate object"
   type = object({
-    domain_name = string
+    domain_name = string,
+    arn         = string
   })
 }
 
