@@ -1,7 +1,3 @@
-data "aws_acm_certificate" "tls_cert" {
-  domain = "${var.cert_domain}"
-}
-
 resource "aws_cloudfront_distribution" "cf_distro" {
   aliases = ["${var.domain_name}"]
   comment = "${var.domain_name}, using OAI"
@@ -46,7 +42,7 @@ resource "aws_cloudfront_distribution" "cf_distro" {
   }
 
   viewer_certificate {
-    acm_certificate_arn            = data.aws_acm_certificate.tls_cert.arn
+    acm_certificate_arn            = var.cert_arn
     cloudfront_default_certificate = "false"
     minimum_protocol_version       = "TLSv1.1_2016"
     ssl_support_method             = "sni-only"
